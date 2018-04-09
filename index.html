@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="asset/css/style.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <br>
+    
+        <!-- Jumbotron -->
+    <div class="jumbotron">
+        <h1 class="text-center">Train Schedule</h1>
+    </div>
+    <div class="row">
+            <div class="card card-default">
+                    <div class="card-heading">
+                      <h3 class="card-title">New Train Enter Here</h3>
+                    </div>
+                    <div class="card-body">
+          
+                      <!-- Sign-up Form (note the various input "types")-->
+                      <form role="form">
+                        <div class="form-group row">
+                          <label for="name-input">Train Name:</label>
+                          <input class="form-control" id="name-input" type="text">
+                        </div>
+                        <div class="form-group row">
+                          <label for="destination-input">Destination:</label>
+                          <input class="form-control" id="destination" type="text">
+                        </div>
+                        <div class="form-group row">
+                          <label for="time-input">First Train Time:</label>
+                          <input class="form-control" id="first-train" type="number">
+                        </div>
+                        <div class="form-group row">
+                          <label for="frequency-input">Frequency:</label>
+                          <input class="form-control" id="frequency"></input>
+                        </div>
+                        <button class="btn btn-default" id="add-train" type="submit">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class ="row">
+
+                    <table class="table table-striped">
+                        <thead id="traintable">
+                            <tr>
+                                <th>Train Name</th>
+                                <th>Destination</th>
+                                <th>Frequency</th>
+                                <th>Next Arrival</th>
+                                <th>Minutes Away</th>
+                            </tr>
+                            <tr>
+                                <td id="Name"></td>
+                                <td id="Destination"></td>
+                                <td id="Frequency"></td>
+                                <td id="Next"></td>
+                                <td id="Minutes"></td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+          
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/javascript/schedule.js"></script> 
+
+</body>
+</html>
