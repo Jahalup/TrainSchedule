@@ -7,10 +7,11 @@ var config = {
     messagingSenderId: "579877331910"
   };
   firebase.initializeApp(config);
+  
 
   var database = firebase.database();
   var trainCount = 0;
-//   var trains = [];
+
   var name = "";
     var destination = "";
     var firstTime = 0;
@@ -25,7 +26,8 @@ var config = {
       frequency = $("#frequency").val().trim();
 
    
-      database.ref().set({
+    //   database.ref().set({
+        database.ref().push({
         name: name,
         destination: destination,
         firsttrain: firsttrain,
@@ -33,41 +35,47 @@ var config = {
       });
     });
 
-    database.ref().on("value", function(snapshot) {
+    database.ref().on('child_added', function(childSnapshot, prevChildKey) {
 
-        console.log(snapshot.val());
-        console.log(snapshot.val().name);
-        console.log(snapshot.val().destination);
-        console.log(snapshot.val().firsttrain);
-        console.log(snapshot.val().frequency);
+        console.log(childSnapshot.val());
+        console.log(childSnapshot.val().name);
+        console.log(childSnapshot.val().destination);
+        console.log(childSnapshot.val().firsttrain);
+        console.log(childSnapshot.val().frequency);
 // New table row for each train
-        var trainItem = $("<tr>");
-// New table data
-            var trainname = $("<td>");
-            var traindest = $("<td>");
-            var trainfreq = $("<td>");
-            var trainfirst = $("<td>");
-//  Giving each train a unique id
-        trainItem.attr("id", "item-" + trainCount);
-        $("#traintable").append(trainItem);
-        trainname.attr("id", "item-" + trainCount);
-        traindest.attr("id", "item-" + trainCount);
-        trainfreq.attr("id", "item-" + trainCount);
-        trainfirst.attr("id", "item-" + trainCount);
-        trainCount++;
+//         var trainItem = $("<tr>");
+// // New table data
+//             var trainname = $("<td>");
+//             var traindest = $("<td>");
+//             var trainfreq = $("<td>");
+//             var trainfirst = $("<td>");
+// //  Giving each train a unique id
+//         trainItem.attr("id", "item-" + trainCount);
+//         $("#traintable").append(trainItem);
+//         trainname.attr("id", "item-" + trainCount);
+//         traindest.attr("id", "item-" + trainCount);
+//         trainfreq.attr("id", "item-" + trainCount);
+//         trainfirst.attr("id", "item-" + trainCount);
+//         trainCount++;
 
-// Adding the text to the table from the database
-        $(trainname).text(snapshot.val().name);
-        $(traindest).text(snapshot.val().destination);
-        $(trainfreq).text(snapshot.val().frequency);
-        $(trainfirst).text(snapshot.val().firsttrain);
+// // Adding the text to the table from the database
+//         $(trainname).text(snapshot.val().name);
+//         $(traindest).text(snapshot.val().destination);
+//         $(trainfreq).text(snapshot.val().frequency);
+//         $(trainfirst).text(snapshot.val().firsttrain);
 
-// Appending the items to the new row
-        $(trainItem).append(trainname);
-        $(trainItem).append(traindest);
-        $(trainItem).append(trainfreq);
-        $(trainItem).append(trainfirst);
+// // Appending the items to the new row
+//         $(trainItem).append(trainname);
+//         $(trainItem).append(traindest);
+//         $(trainItem).append(trainfreq);
+//         $(trainItem).append(trainfirst);
+        $("#traintable1").append("<tr><td>" + childSnapshot.val().name + 
+                                "</td><td>" + childSnapshot.val().destination +
+                                "</td><td>" + childSnapshot.val().frequency + 
+                                "</td><td>" + childSnapshot.val().firsttrain + "</td></tr>")
+      
     
     }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
       });
+
