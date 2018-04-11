@@ -1,37 +1,38 @@
 var config = {
-    apiKey: "AIzaSyD611HrWf0i-iiMxKbKPgGmaCdmlItvSO8",
-    authDomain: "trainschedul-53877.firebaseapp.com",
-    databaseURL: "https://trainschedul-53877.firebaseio.com",
-    projectId: "trainschedul-53877",
-    storageBucket: "trainschedul-53877.appspot.com",
-    messagingSenderId: "579877331910"
+    apiKey: "AIzaSyALFpcpOD3eARi7XWpNUjVx9_YpVFGovpE",
+    authDomain: "trainschedule-37e01.firebaseapp.com",
+    databaseURL: "https://trainschedule-37e01.firebaseio.com",
+    projectId: "trainschedule-37e01",
+    storageBucket: "",
+    messagingSenderId: "391108227282"
   };
   firebase.initializeApp(config);
   
+  var getplacephoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyCszsmnxskb-X0fIPmiEBfDc2okUgY5jFw";
 
   var database = firebase.database();
-  var trainCount = 0;
+
 
   var name = "";
     var destination = "";
-    var firstTime = 0;
+    var firstTime = "";
     var frequency = "";
-
-
+   
+    
     $("#add-train").on("click", function(event) {
         event.preventDefault();
         name = $("#name-input").val().trim();
       destination = $("#destination").val().trim();
-      firsttrain = $("#first-train").val().trim();
+      firstTime = $("#first-train").val().trim();
       frequency = $("#frequency").val().trim();
-
+         
    
-    //   database.ref().set({
         database.ref().push({
         name: name,
         destination: destination,
-        firsttrain: firsttrain,
-        frequency: frequency
+        frequency: frequency,
+        firstTime: firstTime,
+        
       });
     });
 
@@ -40,41 +41,31 @@ var config = {
         console.log(childSnapshot.val());
         console.log(childSnapshot.val().name);
         console.log(childSnapshot.val().destination);
-        console.log(childSnapshot.val().firsttrain);
+        console.log(childSnapshot.val().firstTime);
         console.log(childSnapshot.val().frequency);
-// New table row for each train
-//         var trainItem = $("<tr>");
-// // New table data
-//             var trainname = $("<td>");
-//             var traindest = $("<td>");
-//             var trainfreq = $("<td>");
-//             var trainfirst = $("<td>");
-// //  Giving each train a unique id
-//         trainItem.attr("id", "item-" + trainCount);
-//         $("#traintable").append(trainItem);
-//         trainname.attr("id", "item-" + trainCount);
-//         traindest.attr("id", "item-" + trainCount);
-//         trainfreq.attr("id", "item-" + trainCount);
-//         trainfirst.attr("id", "item-" + trainCount);
-//         trainCount++;
+       
+           
 
-// // Adding the text to the table from the database
-//         $(trainname).text(snapshot.val().name);
-//         $(traindest).text(snapshot.val().destination);
-//         $(trainfreq).text(snapshot.val().frequency);
-//         $(trainfirst).text(snapshot.val().firsttrain);
 
-// // Appending the items to the new row
-//         $(trainItem).append(trainname);
-//         $(trainItem).append(traindest);
-//         $(trainItem).append(trainfreq);
-//         $(trainItem).append(trainfirst);
-        $("#traintable1").append("<tr><td>" + childSnapshot.val().name + 
-                                "</td><td>" + childSnapshot.val().destination +
-                                "</td><td>" + childSnapshot.val().frequency + 
-                                "</td><td>" + childSnapshot.val().firsttrain + "</td></tr>")
-      
-    
+var Time = moment(childSnapshot.val().firstTime, 'HH:mm');
+var trainTime = moment(Time).format('HH:mm');
+var Frequency = childSnapshot.val().frequency;
+            
+           
+var timediff = moment().diff(moment(trainTime, 'HH:mm'), "minutes");
+console.log("time difference: " + timediff);
+var MinutesToArrive = Frequency - timediff % Frequency;
+console.log("minutes till arrival: " + MinutesToArrive);
+var nextTrain = moment().add(MinutesToArrive, 'minutes').format('HH:mm');
+console.log("next train: " + nextTrain);
+
+
+ $("#traintable1").append("<tr><td>" + childSnapshot.val().name + 
+                        "</td><td>" + childSnapshot.val().destination +
+                        "</td><td>" + childSnapshot.val().frequency + 
+                        "</td><td>" + childSnapshot.val().firstTime +
+                        "</td><td>" + nextTrain + 
+                        "</td><td>" + MinutesToArrive + "</td></tr>")
     }, function(errorObject) {
         console.log("Errors handled: " + errorObject.code);
       });

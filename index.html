@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="asset/css/style.css" />
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -37,7 +38,7 @@
                         </div>
                         <div class="form-group row">
                           <label for="time-input">First Train Time:</label>
-                          <input class="form-control" id="first-train" type="number">
+                          <input class="form-control" id="first-train"></input>
                         </div>
                         <div class="form-group row">
                           <label for="frequency-input">Frequency:</label>
@@ -47,6 +48,20 @@
                       </form>
                     </div>
                   </div>
+
+                  <div class="card card-default">
+                        <div class="card-heading">
+                          <h3 class="card-title">Destination Image</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>image</p>
+                            </div>
+                            </div>
+
+
+
+
+
                 </div>
                 <div class ="row">
 
@@ -56,16 +71,10 @@
                                 <th>Train Name</th>
                                 <th>Destination</th>
                                 <th>Frequency</th>
+                                <th>First Departure</th>
                                 <th>Next Arrival</th>
                                 <th>Minutes Away</th>
-                            </tr>
-                            <!-- <tr>
-                                <td id="Name"></td>
-                                <td id="Destination"></td>
-                                <td id="Frequency"></td>
-                                <td id="Next"></td>
-                                <td id="Minutes"></td>
-                            </tr> -->
+                            </tr>                          
                         </thead>
                     </table>
                 </div>
