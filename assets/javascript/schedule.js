@@ -8,17 +8,16 @@ var config = {
   };
   firebase.initializeApp(config);
   
-  var getplacephoto = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyCszsmnxskb-X0fIPmiEBfDc2okUgY5jFw";
 
   var database = firebase.database();
 
 
-  var name = "";
+    var name = "";
     var destination = "";
     var firstTime = "";
     var frequency = "";
    
-    
+// Trimming and storing user input
     $("#add-train").on("click", function(event) {
         event.preventDefault();
         name = $("#name-input").val().trim();
@@ -26,17 +25,21 @@ var config = {
       firstTime = $("#first-train").val().trim();
       frequency = $("#frequency").val().trim();
          
-   
+//    Pushing to the database
         database.ref().push({
         name: name,
         destination: destination,
         frequency: frequency,
-        firstTime: firstTime,
+        firstTime: firstTime
         
       });
+
+//   Clearing the form input
+      $("#traininput")[0].reset();
     });
 
-    database.ref().on('child_added', function(childSnapshot, prevChildKey) {
+
+database.ref().on('child_added', function(childSnapshot, prevChildKey) {
 
         console.log(childSnapshot.val());
         console.log(childSnapshot.val().name);
@@ -44,22 +47,32 @@ var config = {
         console.log(childSnapshot.val().firstTime);
         console.log(childSnapshot.val().frequency);
        
-           
 
-
+// Formatting the time for moment
 var Time = moment(childSnapshot.val().firstTime, 'HH:mm');
+console.log("TIME" + Time);
 var trainTime = moment(Time).format('HH:mm');
+console.log("converted time" + trainTime);
+var trainTime2 = moment(trainTime,'HH:mm').subtract(1, 'years');
 var Frequency = childSnapshot.val().frequency;
-            
-           
-var timediff = moment().diff(moment(trainTime, 'HH:mm'), "minutes");
-console.log("time difference: " + timediff);
+
+// Calculating the time remaining until next train arrival
+var timediff = moment().diff(moment(trainTime2, 'HH:mm'), "minutes");
 var MinutesToArrive = Frequency - timediff % Frequency;
-console.log("minutes till arrival: " + MinutesToArrive);
+
+// Calculating the time of next arrival
 var nextTrain = moment().add(MinutesToArrive, 'minutes').format('HH:mm');
+
+console.log("time difference: " + timediff);
+console.log("minutes till arrival: " + MinutesToArrive);
 console.log("next train: " + nextTrain);
 
 
+
+// Appending data to the html card and table
+$("#bound").text(childSnapshot.val().destination);
+$("#arrive").text(nextTrain);
+$("#minsaway").text(MinutesToArrive);
  $("#traintable1").append("<tr><td>" + childSnapshot.val().name + 
                         "</td><td>" + childSnapshot.val().destination +
                         "</td><td>" + childSnapshot.val().frequency + 

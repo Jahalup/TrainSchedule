@@ -6,7 +6,9 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" media="screen" href="asset/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pinyon+Script" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
 </head>
@@ -15,69 +17,80 @@
 
         <br>
     
-        <!-- Jumbotron -->
-    <div class="jumbotron">
+        <!-- Heading with Title -->
+        <div id ="jumbo" class="jumbotron">
         <h1 class="text-center">Train Schedule</h1>
-    </div>
-    <div class="row">
-            <div class="card card-default">
-                    <div class="card-heading">
-                      <h3 class="card-title">New Train Enter Here</h3>
+        </div>
+
+        <!-- Row containing input and image cards -->
+        <div class="row">
+            <!-- First Column -->
+            <div class="col">
+                 <div id="trainform" class="card card-default">
+                    <div id="titlecard" class="card-heading">
+                      <h3 class="card-title">Enter New Train Here</h3>
                     </div>
                     <div class="card-body">
           
-                      <!-- Sign-up Form (note the various input "types")-->
-                      <form role="form">
+                      <!--Main train data input form-->
+                    <form id="traininput" role="form">
+                        <!-- Train Name -->
                         <div class="form-group row">
                           <label for="name-input">Train Name:</label>
                           <input class="form-control" id="name-input" type="text">
                         </div>
+                        <!-- Destination -->
                         <div class="form-group row">
                           <label for="destination-input">Destination:</label>
                           <input class="form-control" id="destination" type="text">
                         </div>
+                        <!-- First train time -->
                         <div class="form-group row">
                           <label for="time-input">First Train Time:</label>
                           <input class="form-control" id="first-train"></input>
                         </div>
+                        <!-- Frequency -->
                         <div class="form-group row">
                           <label for="frequency-input">Frequency:</label>
                           <input class="form-control" id="frequency"></input>
                         </div>
+                        <!-- Add train button -->
                         <button class="btn btn-default" id="add-train" type="submit">Submit</button>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div class="card card-default">
-                        <div class="card-heading">
-                          <h3 class="card-title">Destination Image</h3>
-                        </div>
-                        <div class="card-body">
-                            <p>image</p>
-                            </div>
-                            </div>
-
-
-
-
-
+                    </form>
                 </div>
-                <div class ="row">
-
-                    <table id ="traintable1" class="table table-striped">
-                        <thead id="traintable">
-                            <tr>
-                                <th>Train Name</th>
-                                <th>Destination</th>
-                                <th>Frequency</th>
-                                <th>First Departure</th>
-                                <th>Next Arrival</th>
-                                <th>Minutes Away</th>
-                            </tr>                          
-                        </thead>
-                    </table>
+            </div>
+        </div>
+            <!-- Second Column -->
+        <div class="col">
+            <div id="imagecard" class="card card-default">
+                <div class="card-heading">
+                    <h3 class="card-title">The <span id="bound"></span>-bound train arrives at:  <span id="arrive"></span></h3>
                 </div>
+                <div class="card-body">
+                    <p>Which is in only: <span id="minsaway"></span> minutes.</p>
+                    <img id="trainimage" src="assets/css/train3.png">
+                </div>
+            </div>
+        </div>
+
+</div>
+<!-- Table Row -->
+        <div class ="row">
+
+            <table id ="traintable1" class="table table-striped">
+                <thead id="traintable">
+                    <tr>
+                        <!-- Table Headings -->
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency</th>
+                        <th>First Departure</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                    </tr>                          
+                </thead>
+            </table>
+        </div>
           
 
 

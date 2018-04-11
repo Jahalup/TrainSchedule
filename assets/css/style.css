@@ -1,0 +1,58 @@
+
+/* Jumbotron title */
+.jumbotron {
+    font-family: 'Pinyon Script', cursive;
+    background-color: antiquewhite;
+  
+}
+
+#jumbo {
+    padding: 5px;
+    border: solid darkslategray 5px;
+}
+h1 {
+    font-size: 50px;
+    font-weight: bolder;
+}
+
+/* Main Body background */
+body {
+    background-image: url("antique.jpg");
+    /* background-color: rgb(218, 211, 204); */
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Table Styles */
+#traintable1 {
+    background-color: antiquewhite;
+    margin-top: 10px;
+    border: solid darkslategray 2px;
+}
+
+/* Train image */
+#trainimage {
+width: 100%;
+height: 200px;
+z-index: 100;
+margin: auto;
+}
+
+#imagecard {
+    height: 400px;
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 10px;
+    font-weight: bolder;
+    border: solid darkslategray 2px;
+}
+h3 {
+    font-weight: bolder;
+}
+#trainform {
+    background-color: antiquewhite;
+    padding: 10px;
+    border: solid darkslategray 2px;
+}
+#titlecard {
+    text-align: center;
+}
